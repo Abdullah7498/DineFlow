@@ -45,7 +45,7 @@ app.use(
   })
 )
 
-// app.use('/api/', apiLimiter)
+app.use('/api/', apiLimiter)
 
 if (env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
