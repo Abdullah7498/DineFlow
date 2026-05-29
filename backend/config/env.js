@@ -13,6 +13,11 @@ const env = cleanEnv(process.env, {
   CLOUDINARY_CLOUD_NAME: str({ default: 'placeholder' }),
   CLOUDINARY_API_KEY: str({ default: 'placeholder' }),
   CLOUDINARY_API_SECRET: str({ default: 'placeholder' }),
+  AWS_REGION: str({ default: 'us-east-1' }),
+  AWS_ACCESS_KEY_ID: str({ default: '', allowEmpty: true }),
+  AWS_SECRET_ACCESS_KEY: str({ default: '', allowEmpty: true }),
+  AWS_S3_BUCKET: str({ default: '', allowEmpty: true }),
+  AWS_CLOUDFRONT_URL: str({ default: '', allowEmpty: true }),
   JWT_SECRET: str({ default: 'supersecretkey' }),
 });
 

@@ -221,6 +221,75 @@ Every order update syncs instantly across all connected systems.
 
 ---
 
+# ✅ Current Backend Progress
+
+The backend currently uses Express, MongoDB/Mongoose, Socket.IO, Redis/BullMQ, JWT auth, tenant-isolated databases, and AWS S3 asset uploads.
+
+## AWS S3 Uploads
+
+Configure these values in `backend/.env`:
+
+```env
+AWS_REGION=us-east-1
+AWS_ACCESS_KEY_ID=your_access_key_id
+AWS_SECRET_ACCESS_KEY=your_secret_access_key
+AWS_S3_BUCKET=your-dineflow-assets-bucket
+AWS_CLOUDFRONT_URL=https://your-cloudfront-domain.cloudfront.net
+```
+
+Available upload APIs:
+
+```txt
+POST /api/upload
+POST /api/upload/presigned-url
+```
+
+## Implemented API Modules
+
+```txt
+POST /api/auth/superadmin/setup
+POST /api/auth/superadmin/login
+POST /api/auth/tenant/register
+POST /api/auth/owner/login
+POST /api/auth/employee/register
+POST /api/auth/employee/login
+POST /api/auth/customer/register
+POST /api/auth/customer/login
+
+GET  /api/restaurant/branches
+POST /api/restaurant/branches
+GET  /api/restaurant/tables
+POST /api/restaurant/tables
+PATCH /api/restaurant/tables/:id/status
+
+GET  /api/menu
+POST /api/menu/categories
+POST /api/menu/items
+PATCH /api/menu/items/:id/availability
+
+POST /api/orders
+GET  /api/orders/live
+PATCH /api/orders/:id/status
+
+POST /api/pos/create-bill
+POST /api/pos/refund
+
+GET  /api/inventory
+POST /api/inventory
+PATCH /api/inventory/:id/adjust
+
+GET  /api/analytics/dashboard
+GET  /api/loyalty/wallet
+```
+
+Socket clients should join branch rooms with:
+
+```txt
+join_branch(branchId)
+```
+
+---
+
 # 📈 Future Roadmap
 
 ## Phase 1

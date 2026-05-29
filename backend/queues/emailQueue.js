@@ -7,9 +7,17 @@ const connection = {
   password: env.REDIS_PASSWORD || undefined,
 };
 
-const emailQueue = new Queue('emailQueue', { connection });
-
+let emailQueue;
 let emailWorker;
+
+const getEmailQueue = () => {
+  if (emailQueue) {
+    return emailQueue;
+  }
+
+  emailQueue = new Queue('emailQueue', { connection });
+  return emailQueue;
+};
 
 const createEmailWorker = () => {
   if (emailWorker) {
@@ -42,6 +50,6 @@ const createEmailWorker = () => {
 };
 
 module.exports = {
-  emailQueue,
+  getEmailQueue,
   createEmailWorker,
 };

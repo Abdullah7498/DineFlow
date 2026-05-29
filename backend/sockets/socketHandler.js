@@ -13,15 +13,15 @@ const initSockets = (server) => {
   io.on('connection', (socket) => {
     console.log(`👤 Client connected: ${socket.id}`);
 
-    socket.on('join_restaurant', (restaurantId) => {
-      socket.join(restaurantId);
-      console.log(`🏢 Socket ${socket.id} joined restaurant room: ${restaurantId}`);
+    socket.on('join_branch', (branchId) => {
+      socket.join(`branch:${branchId}`);
+      console.log(`🏢 Socket ${socket.id} joined branch room: ${branchId}`);
     });
 
     socket.on('new_order', (orderData) => {
-      const { restaurantId } = orderData;
-      console.log(`📦 New order received for restaurant room: ${restaurantId}`);
-      io.to(restaurantId).emit('order_update', orderData);
+      const { branchId } = orderData;
+      console.log(`📦 New order received for branch room: ${branchId}`);
+      io.to(`branch:${branchId}`).emit('order_update', orderData);
     });
 
     socket.on('disconnect', () => {

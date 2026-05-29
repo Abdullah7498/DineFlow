@@ -2,6 +2,14 @@ const mongoose = require('mongoose');
 const env = require('./env');
 
 const UserSchema = require('../models/schemas/UserSchema');
+const BranchSchema = require('../models/schemas/BranchSchema');
+const TableSchema = require('../models/schemas/TableSchema');
+const MenuCategorySchema = require('../models/schemas/MenuCategorySchema');
+const MenuItemSchema = require('../models/schemas/MenuItemSchema');
+const OrderSchema = require('../models/schemas/OrderSchema');
+const PaymentSchema = require('../models/schemas/PaymentSchema');
+const InventoryItemSchema = require('../models/schemas/InventoryItemSchema');
+const LoyaltyWalletSchema = require('../models/schemas/LoyaltyWalletSchema');
 
 // Cache to store tenant connections and dynamically compiled models
 const connectionCache = {};
@@ -43,6 +51,14 @@ const getTenantConnection = async (dbName) => {
   // Dynamically compile and bind schemas specifically to this connection instance
   const models = {
     User: connection.model('User', UserSchema),
+    Branch: connection.model('Branch', BranchSchema),
+    Table: connection.model('Table', TableSchema),
+    MenuCategory: connection.model('MenuCategory', MenuCategorySchema),
+    MenuItem: connection.model('MenuItem', MenuItemSchema),
+    Order: connection.model('Order', OrderSchema),
+    Payment: connection.model('Payment', PaymentSchema),
+    InventoryItem: connection.model('InventoryItem', InventoryItemSchema),
+    LoyaltyWallet: connection.model('LoyaltyWallet', LoyaltyWalletSchema),
   };
 
   connectionCache[dbName] = { connection, models };
